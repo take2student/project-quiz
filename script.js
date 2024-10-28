@@ -185,5 +185,8 @@ submitButton.addEventListener('click', function() {
     } else if(answer4Button.innerText == firstQuestionCorrectAnswer) {
       answer4Button.style.backgroundColor = 'green';
     }
+
+    // Display feedback: button caption changes to 'next question'
+    submitButton.innerText = 'Next Question';
   }
 });
