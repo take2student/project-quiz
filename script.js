@@ -108,6 +108,7 @@ const answer2Button = document.getElementById('answer2');
 const answer3Button = document.getElementById('answer3');
 const answer4Button = document.getElementById('answer4');
 const submitButton = document.getElementById('submit');
+const scoreElement = document.getElementById('score');
 
 let questionCorrectAnswer;
 
@@ -167,6 +168,7 @@ answer4Button.addEventListener('click', function() {
 });
 
 let goToNextQuestion = false;
+let currentScore = 0;
 
 submitButton.addEventListener('click', function() {
   if(goToNextQuestion === false) {
@@ -187,17 +189,36 @@ submitButton.addEventListener('click', function() {
       // Display feedback: correct answer should be highlighted green
       if(answer1Button.innerText == questionCorrectAnswer) {
         answer1Button.style.backgroundColor = 'green';
+        // Check if user selected correct answer
+        if(selectedAnswer == 1) {
+          currentScore++; // Increment the score
+        }
       
       } else if(answer2Button.innerText == questionCorrectAnswer) {
         answer2Button.style.backgroundColor = 'green';
-      
+        // Check if user selected correct answer
+        if(selectedAnswer == 2) {
+          currentScore++; // Increment the score
+        }
+
       } else if(answer3Button.innerText == questionCorrectAnswer) {
         answer3Button.style.backgroundColor = 'green';
+        // Check if user selected correct answer
+        if(selectedAnswer == 3) {
+          currentScore++; // Increment the score
+        }
   
       } else if(answer4Button.innerText == questionCorrectAnswer) {
         answer4Button.style.backgroundColor = 'green';
+        // Check if user selected correct answer
+        if(selectedAnswer == 4) {
+          currentScore++; // Increment the score
+        }
       }
-  
+
+      // Display feedback: show current score
+      scoreElement.innerText = currentScore;
+
       // Display feedback: button caption changes to 'next question'
       submitButton.innerText = 'Next Question';
       
