@@ -113,6 +113,7 @@ const submitButton = document.getElementById('submit');
 const firstQuestion = questions[0];
 const firstQuestionText = firstQuestion.question;
 const firstQuestionAnswers = firstQuestion.options;
+const firstQuestionCorrectAnswer = firstQuestion.answer;
 
 questionElement.innerText = firstQuestionText;
 answer1Button.innerText = firstQuestionAnswers[0];
@@ -159,5 +160,19 @@ answer4Button.addEventListener('click', function() {
 submitButton.addEventListener('click', function() {
   if(selectedAnswer === null) {
     alert("You must select an answer");
+  } else {
+    // Display feedback: correct answer should be highlighted green
+    if(answer1Button.innerText == firstQuestionCorrectAnswer) {
+      answer1Button.style.backgroundColor = 'green';
+    
+    } else if(answer2Button.innerText == firstQuestionCorrectAnswer) {
+      answer2Button.style.backgroundColor = 'green';
+    
+    } else if(answer3Button.innerText == firstQuestionCorrectAnswer) {
+      answer3Button.style.backgroundColor = 'green';
+
+    } else if(answer4Button.innerText == firstQuestionCorrectAnswer) {
+      answer4Button.style.backgroundColor = 'green';
+    }
   }
 });
