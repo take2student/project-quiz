@@ -161,6 +161,17 @@ submitButton.addEventListener('click', function() {
   if(selectedAnswer === null) {
     alert("You must select an answer");
   } else {
+    // Display feedback: selected answer should be highlighted red
+    if(selectedAnswer == 1) {
+      answer1Button.style.backgroundColor = 'red';
+    } else if(selectedAnswer == 2) {
+      answer2Button.style.backgroundColor = 'red';
+    } else if(selectedAnswer == 3) {
+      answer3Button.style.backgroundColor = 'red';
+    } else if(selectedAnswer == 4) {
+      answer4Button.style.backgroundColor = 'red';
+    } 
+
     // Display feedback: correct answer should be highlighted green
     if(answer1Button.innerText == firstQuestionCorrectAnswer) {
       answer1Button.style.backgroundColor = 'green';
