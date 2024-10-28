@@ -107,6 +107,7 @@ const answer1Button = document.getElementById('answer1');
 const answer2Button = document.getElementById('answer2');
 const answer3Button = document.getElementById('answer3');
 const answer4Button = document.getElementById('answer4');
+const submitButton = document.getElementById('submit');
 
 // Set question and answer button texts
 const firstQuestion = questions[0];
@@ -118,3 +119,45 @@ answer1Button.innerText = firstQuestionAnswers[0];
 answer2Button.innerText = firstQuestionAnswers[1];
 answer3Button.innerText = firstQuestionAnswers[2];
 answer4Button.innerText = firstQuestionAnswers[3];
+
+// Highlight button when clicked
+// - button: the button that was clicked
+function highlightButton(button) {
+  // Clear all button backgrounds
+  answer1Button.style.backgroundColor = '';
+  answer2Button.style.backgroundColor = '';
+  answer3Button.style.backgroundColor = '';
+  answer4Button.style.backgroundColor = '';
+
+  // Set clicked button's background to lightblue
+  button.style.backgroundColor = 'lightblue';
+}
+
+let selectedAnswer = null;
+
+// Add click event listeners to all buttons
+answer1Button.addEventListener('click', function() {
+  selectedAnswer = 1;
+  highlightButton(answer1Button);
+});
+
+answer2Button.addEventListener('click', function() {
+  selectedAnswer = 2;
+  highlightButton(answer2Button);
+});
+
+answer3Button.addEventListener('click', function() {
+  selectedAnswer = 3;
+  highlightButton(answer3Button);
+});
+
+answer4Button.addEventListener('click', function() {
+  selectedAnswer = 4;
+  highlightButton(answer4Button);
+});
+
+submitButton.addEventListener('click', function() {
+  if(selectedAnswer === null) {
+    alert("You must select an answer");
+  }
+});
