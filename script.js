@@ -102,5 +102,19 @@ const questions = [
 ];
 
 // Add your code underneath this comment.
+const questionElement = document.getElementById('question');
+const answer1Button = document.getElementById('answer1');
+const answer2Button = document.getElementById('answer2');
+const answer3Button = document.getElementById('answer3');
+const answer4Button = document.getElementById('answer4');
 
+// Set question and answer button texts
+const firstQuestion = questions[0];
+const firstQuestionText = firstQuestion.question;
+const firstQuestionAnswers = firstQuestion.options;
 
+questionElement.innerText = firstQuestionText;
+answer1Button.innerText = firstQuestionAnswers[0];
+answer2Button.innerText = firstQuestionAnswers[1];
+answer3Button.innerText = firstQuestionAnswers[2];
+answer4Button.innerText = firstQuestionAnswers[3];
