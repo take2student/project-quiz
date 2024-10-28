@@ -109,17 +109,24 @@ const answer3Button = document.getElementById('answer3');
 const answer4Button = document.getElementById('answer4');
 const submitButton = document.getElementById('submit');
 
-// Set question and answer button texts
-const firstQuestion = questions[0];
-const firstQuestionText = firstQuestion.question;
-const firstQuestionAnswers = firstQuestion.options;
-const firstQuestionCorrectAnswer = firstQuestion.answer;
+let questionCorrectAnswer;
 
-questionElement.innerText = firstQuestionText;
-answer1Button.innerText = firstQuestionAnswers[0];
-answer2Button.innerText = firstQuestionAnswers[1];
-answer3Button.innerText = firstQuestionAnswers[2];
-answer4Button.innerText = firstQuestionAnswers[3];
+// Set question and answer button texts
+// - question: the current question
+function goToQuestion(question) {
+  const questionText = question.question;
+  const questionAnswers = question.options;
+  questionCorrectAnswer = question.answer;
+
+  questionElement.innerText = questionText;
+  answer1Button.innerText = questionAnswers[0];
+  answer2Button.innerText = questionAnswers[1];
+  answer3Button.innerText = questionAnswers[2];
+  answer4Button.innerText = questionAnswers[3];
+}
+
+let currentQuestionIndex = 0;
+goToQuestion(questions[currentQuestionIndex]);
 
 // Highlight button when clicked
 // - button: the button that was clicked
@@ -131,7 +138,9 @@ function highlightButton(button) {
   answer4Button.style.backgroundColor = '';
 
   // Set clicked button's background to lightblue
-  button.style.backgroundColor = 'lightblue';
+  if(button !== null) {
+    button.style.backgroundColor = 'lightblue';
+  }
 }
 
 let selectedAnswer = null;
@@ -157,36 +166,55 @@ answer4Button.addEventListener('click', function() {
   highlightButton(answer4Button);
 });
 
+let goToNextQuestion = false;
+
 submitButton.addEventListener('click', function() {
-  if(selectedAnswer === null) {
-    alert("You must select an answer");
-  } else {
-    // Display feedback: selected answer should be highlighted red
-    if(selectedAnswer == 1) {
-      answer1Button.style.backgroundColor = 'red';
-    } else if(selectedAnswer == 2) {
-      answer2Button.style.backgroundColor = 'red';
-    } else if(selectedAnswer == 3) {
-      answer3Button.style.backgroundColor = 'red';
-    } else if(selectedAnswer == 4) {
-      answer4Button.style.backgroundColor = 'red';
-    } 
-
-    // Display feedback: correct answer should be highlighted green
-    if(answer1Button.innerText == firstQuestionCorrectAnswer) {
-      answer1Button.style.backgroundColor = 'green';
-    
-    } else if(answer2Button.innerText == firstQuestionCorrectAnswer) {
-      answer2Button.style.backgroundColor = 'green';
-    
-    } else if(answer3Button.innerText == firstQuestionCorrectAnswer) {
-      answer3Button.style.backgroundColor = 'green';
-
-    } else if(answer4Button.innerText == firstQuestionCorrectAnswer) {
-      answer4Button.style.backgroundColor = 'green';
+  if(goToNextQuestion === false) {
+    if(selectedAnswer === null) {
+      alert("You must select an answer");
+    } else {
+      // Display feedback: selected answer should be highlighted red
+      if(selectedAnswer == 1) {
+        answer1Button.style.backgroundColor = 'red';
+      } else if(selectedAnswer == 2) {
+        answer2Button.style.backgroundColor = 'red';
+      } else if(selectedAnswer == 3) {
+        answer3Button.style.backgroundColor = 'red';
+      } else if(selectedAnswer == 4) {
+        answer4Button.style.backgroundColor = 'red';
+      } 
+  
+      // Display feedback: correct answer should be highlighted green
+      if(answer1Button.innerText == questionCorrectAnswer) {
+        answer1Button.style.backgroundColor = 'green';
+      
+      } else if(answer2Button.innerText == questionCorrectAnswer) {
+        answer2Button.style.backgroundColor = 'green';
+      
+      } else if(answer3Button.innerText == questionCorrectAnswer) {
+        answer3Button.style.backgroundColor = 'green';
+  
+      } else if(answer4Button.innerText == questionCorrectAnswer) {
+        answer4Button.style.backgroundColor = 'green';
+      }
+  
+      // Display feedback: button caption changes to 'next question'
+      submitButton.innerText = 'Next Question';
+      
+      // Remember to go to next question when the button is clicked again
+      goToNextQuestion = true;
     }
 
-    // Display feedback: button caption changes to 'next question'
-    submitButton.innerText = 'Next Question';
+  } else {
+    // Clear interface
+    submitButton.innerText = 'Submit Answer';
+    highlightButton(null);
+
+    // Go to next question
+    currentQuestionIndex++;
+    goToQuestion(questions[currentQuestionIndex]);
+
+    // Remember to submit answer when button is clicked again
+    goToNextQuestion = false;
   }
 });
