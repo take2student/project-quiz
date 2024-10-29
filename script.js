@@ -110,6 +110,7 @@ const answer4Button = document.getElementById('answer4');
 const submitButton = document.getElementById('submit');
 const scoreElement = document.getElementById('score');
 const roundElement = document.getElementById('round');
+const progressElement = document.getElementById('progress-inside');
 
 let questionCorrectAnswer;
 
@@ -129,6 +130,9 @@ function goToQuestion(question) {
 
 let currentQuestionIndex = 0;
 goToQuestion(questions[currentQuestionIndex]);
+// Update progress bar
+progressElement.style.width = (currentQuestionIndex + 1) / questions.length * 100 + "%";
+
 
 // Highlight button when clicked
 // - button: the button that was clicked
@@ -239,6 +243,9 @@ function nextQuestion() {
 
   // Display current round
   roundElement.innerText = currentQuestionIndex + 1;
+
+  // Update progress bar
+  progressElement.style.width = (currentQuestionIndex + 1) / questions.length * 100 + "%";
 
   // Reset answer to null
   selectedAnswer = null;

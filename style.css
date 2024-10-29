@@ -23,6 +23,19 @@ body {
     font-weight: 600;
 }
 
+#progress-frame {
+    border: 1px solid black;
+    border-radius: 2px;
+    width: 150px;
+    height: 25px;
+}
+
+#progress-inside {
+    height: 25px;
+    background-color: lightblue;
+    width: 0%;
+}
+
 #small-header {
     font-size: 0.5em;
     font-weight: 300;
