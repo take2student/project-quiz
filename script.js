@@ -170,72 +170,65 @@ answer4Button.addEventListener('click', function() {
 let goToNextQuestion = false;
 let currentScore = 0;
 
+function submitAnswer() {
+  if(selectedAnswer === null) {
+    alert("You must select an answer");
+    return;
+  } 
+  
+  // Display feedback: selected answer should be highlighted red
+  if(selectedAnswer == 1) {
+    answer1Button.style.backgroundColor = 'red';
+  } else if(selectedAnswer == 2) {
+    answer2Button.style.backgroundColor = 'red';
+  } else if(selectedAnswer == 3) {
+    answer3Button.style.backgroundColor = 'red';
+  } else if(selectedAnswer == 4) {
+    answer4Button.style.backgroundColor = 'red';
+  } 
+
+  // Display feedback: correct answer should be highlighted green
+  const checkAndHighlightAnswer = (answerButton, index) => {
+    if(answerButton.innerText == questionCorrectAnswer) {
+      answerButton.style.backgroundColor = 'green';
+    
+      // Check if user selected correct answer
+      if(selectedAnswer == index + 1) {
+        currentScore++; // Increment the score
+      }
+    }
+  };
+
+  [answer1Button, answer2Button, answer3Button, answer4Button]
+    .forEach(checkAndHighlightAnswer);
+
+  // Display feedback: show current score
+  scoreElement.innerText = currentScore;
+
+  // Display feedback: button caption changes to 'next question'
+  submitButton.innerText = 'Next Question';
+  
+  // Remember to go to next question when the button is clicked again
+  goToNextQuestion = true;
+}
+
+function nextQuestion() {
+  // Clear interface
+  submitButton.innerText = 'Submit Answer';
+  highlightButton(null);
+
+  // Go to next question
+  currentQuestionIndex++;
+  goToQuestion(questions[currentQuestionIndex]);
+
+  // Remember to submit answer when button is clicked again
+  goToNextQuestion = false;
+}
+
 submitButton.addEventListener('click', function() {
   if(goToNextQuestion === false) {
-    if(selectedAnswer === null) {
-      alert("You must select an answer");
-    } else {
-      // Display feedback: selected answer should be highlighted red
-      if(selectedAnswer == 1) {
-        answer1Button.style.backgroundColor = 'red';
-      } else if(selectedAnswer == 2) {
-        answer2Button.style.backgroundColor = 'red';
-      } else if(selectedAnswer == 3) {
-        answer3Button.style.backgroundColor = 'red';
-      } else if(selectedAnswer == 4) {
-        answer4Button.style.backgroundColor = 'red';
-      } 
-  
-      // Display feedback: correct answer should be highlighted green
-      if(answer1Button.innerText == questionCorrectAnswer) {
-        answer1Button.style.backgroundColor = 'green';
-        // Check if user selected correct answer
-        if(selectedAnswer == 1) {
-          currentScore++; // Increment the score
-        }
-      
-      } else if(answer2Button.innerText == questionCorrectAnswer) {
-        answer2Button.style.backgroundColor = 'green';
-        // Check if user selected correct answer
-        if(selectedAnswer == 2) {
-          currentScore++; // Increment the score
-        }
-
-      } else if(answer3Button.innerText == questionCorrectAnswer) {
-        answer3Button.style.backgroundColor = 'green';
-        // Check if user selected correct answer
-        if(selectedAnswer == 3) {
-          currentScore++; // Increment the score
-        }
-  
-      } else if(answer4Button.innerText == questionCorrectAnswer) {
-        answer4Button.style.backgroundColor = 'green';
-        // Check if user selected correct answer
-        if(selectedAnswer == 4) {
-          currentScore++; // Increment the score
-        }
-      }
-
-      // Display feedback: show current score
-      scoreElement.innerText = currentScore;
-
-      // Display feedback: button caption changes to 'next question'
-      submitButton.innerText = 'Next Question';
-      
-      // Remember to go to next question when the button is clicked again
-      goToNextQuestion = true;
-    }
-
+    submitAnswer();
   } else {
-    // Clear interface
-    submitButton.innerText = 'Submit Answer';
-    highlightButton(null);
-
-    // Go to next question
-    currentQuestionIndex++;
-    goToQuestion(questions[currentQuestionIndex]);
-
-    // Remember to submit answer when button is clicked again
-    goToNextQuestion = false;
+    nextQuestion();
   }
 });
