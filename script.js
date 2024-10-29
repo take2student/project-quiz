@@ -220,10 +220,28 @@ function nextQuestion() {
 
   // Go to next question
   currentQuestionIndex++;
+
+  // Any questions left or should we reset?
+  if(currentQuestionIndex >= questions.length) {
+    alert(`Quiz finished, you scored ${currentScore} points!`);
+    // Go back to question 1
+    // Round reset to 1
+    currentQuestionIndex = 0;
+
+    // Score reset to 0
+    currentScore = 0;
+  } 
+
   goToQuestion(questions[currentQuestionIndex]);
+  
+  // Display feedback: show current score
+  scoreElement.innerText = currentScore;
 
   // Display current round
   roundElement.innerText = currentQuestionIndex + 1;
+
+  // Reset answer to null
+  selectedAnswer = null;
 
   // Remember to submit answer when button is clicked again
   goToNextQuestion = false;
