@@ -109,6 +109,7 @@ const answer3Button = document.getElementById('answer3');
 const answer4Button = document.getElementById('answer4');
 const submitButton = document.getElementById('submit');
 const scoreElement = document.getElementById('score');
+const roundElement = document.getElementById('round');
 
 let questionCorrectAnswer;
 
@@ -220,6 +221,9 @@ function nextQuestion() {
   // Go to next question
   currentQuestionIndex++;
   goToQuestion(questions[currentQuestionIndex]);
+
+  // Display current round
+  roundElement.innerText = currentQuestionIndex + 1;
 
   // Remember to submit answer when button is clicked again
   goToNextQuestion = false;
